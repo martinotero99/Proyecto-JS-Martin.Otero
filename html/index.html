@@ -4,15 +4,70 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
     <title>Carrito de...</title>
 </head>
 <body>
     <header>
         <h1>Tienda de Zapatillas</h1>
-        <button>Login</button>
+        <button class="button" id="form-open">Login</button>
     </header>
+    <section class="home">
+        <div class="form_container">
+          <i class="uil uil-times form_close"></i>
+          <!-- Login From -->
+          <div class="form login_form">
+            <form class="form-login" action="#">
+              <h2>Login</h2>
+              <div class="input_box">
+                <input type="email" placeholder="Enter your email" required id="user" />
+                <i class="uil uil-envelope-alt email"></i>
+              </div>
+              <div class="input_box">
+                <input type="password" placeholder="Enter your password" required id="pass" />
+                <i class="uil uil-lock password"></i>
+                <i class="uil uil-eye-slash pw_hide"></i>
+              </div>
+              <div class="option_field">
+                <span class="checkbox">
+                  <input type="checkbox" id="check" />
+                  <label for="check">Remember me</label>
+                </span>
+                <a href="#" class="forgot_pw">Forgot password?</a>
+              </div>
+              
+              <input type="submit" class="buttonL" value="Login Now" id="loginL">
+              <div class="login_signup">Don't have an account? <a href="#" id="signup">Signup</a></div>
+            </form>
+          </div>
+          <!-- Signup From -->
+          <div class="form signup_form">
+            <form class="form-login" action="#">
+              <h2>Signup</h2>
+              <div class="input_box">
+                <input type="email" placeholder="Enter your email" required id="user"/>
+                <i class="uil uil-envelope-alt email"></i>
+              </div>
+              <div class="input_box">
+                <input type="password" placeholder="Create password" required id="pass" />
+                <i class="uil uil-lock password"></i>
+                <i class="uil uil-eye-slash pw_hide"></i>
+              </div>
+              <div class="input_box">
+                <input type="password" placeholder="Confirm password" required />
+                <i class="uil uil-lock password"></i>
+                <i class="uil uil-eye-slash pw_hide"></i>
+              </div>
+              <input type="submit" class="buttonL" value="Sign Up" id="signupL">
+              <div class="login_signup">Already have an account? <a href="#" id="login">Login</a></div>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <!-- Main Productos-->>
     <section class="contenedor">
         <div class="contenedor-items">
             <div class="item">
@@ -100,24 +155,8 @@
                    <span class="btn-eliminar">
                         <i class="fa-solid fa-trash"></i>
                    </span>
-                </div>
-                <div class="carrito-item">
-                    <img src="../img/amarigrises.jfif" width="80px" alt="">
-                    <div class="carrito-item-detalles">
-                        <span class="carrito-item-titulo">Nike Air Max</span>
-                        <div class="selector-cantidad">
-                            <i class="fa-solid fa-minus restar-cantidad"></i>
-                            <input type="text" value="2" class="carrito-item-cantidad" disabled>
-                            <i class="fa-solid fa-plus sumar-cantidad"></i>
-                        </div>
-                        <span class="carrito-item-precio">$63.000,00</span>
-                    </div>
-                   <button class="btn-eliminar">
-                        <i class="fa-solid fa-trash"></i>
-                   </button>
-                </div>
-                 -->
-                 
+                </div>               
+                 -->    
             </div>
             <div class="carrito-total">
                 <div class="fila">

@@ -195,3 +195,80 @@ function actualizarTotalCarrito(){
     document.getElementsByClassName('carrito-precio-total')[0].innerText = '$'+total.toLocaleString("es") + ",00";
 
 }
+
+// Login.
+const formOpenBtn = document.querySelector("#form-open"),
+  home = document.querySelector(".home"),
+  formContainer = document.querySelector(".form_container"),
+  formCloseBtn = document.querySelector(".form_close"),
+  formulario = document.querySelector(".form-login")
+  signupBtn = document.querySelector("#signupL"),
+  loginBtn = document.querySelector("#loginL"),
+  inputUser = document.querySelector("#user"),
+  inputPass = document.querySelector("#pass"),
+  check = document.querySelector("#check"),
+  pwShowHide = document.querySelectorAll(".pw_hide");
+formOpenBtn.addEventListener("click", () => home.classList.add("show"));
+formCloseBtn.addEventListener("click", () => home.classList.remove("show"));
+pwShowHide.forEach((icon) => {
+  icon.addEventListener("click", () => {
+    let getPwInput = icon.parentElement.querySelector("input");
+    if (getPwInput.type === "password") {
+      getPwInput.type = "text";
+      icon.classList.replace("uil-eye-slash", "uil-eye");
+    } else {
+      getPwInput.type = "password";
+      icon.classList.replace("uil-eye", "uil-eye-slash");
+    }
+  });
+});
+signupBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+  formContainer.classList.add("active");
+});
+loginBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+  formContainer.classList.remove("active");
+});
+
+// Guarda los datos de user y pass.
+function guardar(valor) {
+  const user = { usuario: inputUser.value, pass: inputPass.value };
+  //validar si los campos estan vacios
+   if (valor === "sessionStorage") {
+    sessionStorage.setItem("user", JSON.stringify(user));
+  }
+  if (valor === "localStorage") {
+    localStorage.setItem("user", JSON.stringify(user));
+  } 
+  valor === "sessionStorage" &&
+    sessionStorage.setItem("user", JSON.stringify(user));
+  valor === "localStorage" &&
+    localStorage.setItem("user", JSON.stringify(user));
+  
+    //return user;
+}
+function recuperarDatos(datos) {
+    if (datos) {
+     inputUser.value = datos.usuario;
+     inputPass.value = datos.pass;
+   } 
+ 
+   datos && (inputUser.value = datos.usuario,inputPass.value = datos.pass)
+   console.log(datos);
+ }
+ 
+ recuperarDatos(JSON.parse(localStorage.getItem("user")));
+ 
+ //
+ //Evento
+ formulario.addEventListener("submit", (e) => {
+   e.preventDefault();
+     if (check.checked) {
+     guardar("localStorage");
+   } else {
+     guardar("sessionStorage");
+   }
+  });
+
+  
