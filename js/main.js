@@ -1,4 +1,4 @@
-//variable que mantiene el estado visible del carrito
+//letiable que mantiene el estado visible del carrito
 let carritoVisible = false;
 
 //Espermos que todos los elementos de la pàgina cargen para ejecutar el script
@@ -43,7 +43,11 @@ function ready(){
 }
 //Eliminamos todos los elementos del carrito y lo ocultamos
 function pagarClicked(){
-    alert("Gracias por la compra");
+  Swal.fire({
+    icon: 'success',
+    title: 'Su compra se realizo con exito',
+    text: 'Gracias por su compra!',
+  });
     //Elimino todos los elmentos del carrito
     let carritoItems = document.getElementsByClassName('carrito-items')[0];
     while (carritoItems.hasChildNodes()){
@@ -222,14 +226,7 @@ pwShowHide.forEach((icon) => {
     }
   });
 });
-signupBtn.addEventListener("click", (e) => {
-  e.preventDefault();
-  formContainer.classList.add("active");
-});
-loginBtn.addEventListener("click", (e) => {
-  e.preventDefault();
-  formContainer.classList.remove("active");
-});
+
 
 // Guarda los datos de user y pass.
 function guardar(valor) {
@@ -271,4 +268,57 @@ function recuperarDatos(datos) {
    }
   });
 
+  //Ajax
+  $(document).ready(function() {
+    //  envío del formulario de inicio de sesión usando AJAX
+    $('#loginL').click(function(e) {
+      e.preventDefault(); 
+      
+      // Obtener los valores de los campos de entrada
+      let email = $('#user').val();
+      let password = $('#pass').val();
+      
+      // Crear un objeto de datos que se enviará al servidor
+      let data = {
+        email: email,
+        password: password
+      };
+      
+      // Enviar la solicitud AJAX
+      $.ajax({
+        type: 'POST',
+        url: 'crear-url', //no me alcanzo el tiempo :c
+        data: data,
+        success: function(response) {
+          console.log(response);
+        }
+      });
+    });
+  
+    
+    $('#signupL').click(function(e) {
+      e.preventDefault(); // 
+      
+      // Obtener los valores de los campos de entrada
+      let email = $('#user').val();
+      let password = $('#pass').val();
+      
+      
+      let data = {
+        email: email,
+        password: password
+      };
+      
+      // Enviar la solicitud Fetch
+      fetch('crear-url', { //no me alcanzo el tiempo :c
+        method: 'POST',
+        body: JSON.stringify(data)
+      })
+      .then(function(response) {
+      })
+      .catch(function(error) {
+        console.error(error);
+      });
+    });
+  });
   
