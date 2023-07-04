@@ -8,54 +8,72 @@ if(document.readyState == 'loading'){
     ready();
 }
 
-function ready(){
-    
-    //Agregremos funcionalidad a los botones eliminar del carrito
-    let botonesEliminarItem = document.getElementsByClassName('btn-eliminar');
-    for(let i=0;i<botonesEliminarItem.length; i++){
-        let button = botonesEliminarItem[i];
-        button.addEventListener('click',eliminarItemCarrito);
-    }
+async function ready() {
+  //Agregremos funcionalidad a los botones eliminar del carrito
+  let botonesEliminarItem = document.getElementsByClassName('btn-eliminar');
+  for (let i = 0; i < botonesEliminarItem.length; i++) {
+    let button = botonesEliminarItem[i];
+    button.addEventListener('click', eliminarItemCarrito);
+  }
 
-    //Agrego funcionalidad al boton sumar cantidad
-    let botonesSumarCantidad = document.getElementsByClassName('sumar-cantidad');
-    for(let i=0;i<botonesSumarCantidad.length; i++){
-        let button = botonesSumarCantidad[i];
-        button.addEventListener('click',sumarCantidad);
-    }
+  //Agrego funcionalidad al boton sumar cantidad
+  let botonesSumarCantidad = document.getElementsByClassName('sumar-cantidad');
+  for (let i = 0; i < botonesSumarCantidad.length; i++) {
+    let button = botonesSumarCantidad[i];
+    button.addEventListener('click', sumarCantidad);
+  }
 
-     //Agrego funcionalidad al buton restar cantidad
-    let botonesRestarCantidad = document.getElementsByClassName('restar-cantidad');
-    for(let i=0;i<botonesRestarCantidad.length; i++){
-        let button = botonesRestarCantidad[i];
-        button.addEventListener('click',restarCantidad);
-    }
+  //Agrego funcionalidad al buton restar cantidad
+  let botonesRestarCantidad = document.getElementsByClassName('restar-cantidad');
+  for (let i = 0; i < botonesRestarCantidad.length; i++) {
+    let button = botonesRestarCantidad[i];
+    button.addEventListener('click', restarCantidad);
+  }
 
-    //Agregamos funcionalidad al boton Agregar al carrito
-    let botonesAgregarAlCarrito = document.getElementsByClassName('boton-item');
-    for(let i=0; i<botonesAgregarAlCarrito.length;i++){
-        let button = botonesAgregarAlCarrito[i];
-        button.addEventListener('click', agregarAlCarritoClicked);
-    }
+  //Agregamos funcionalidad al boton Agregar al carrito
+  let botonesAgregarAlCarrito = document.getElementsByClassName('boton-item');
+  for (let i = 0; i < botonesAgregarAlCarrito.length; i++) {
+    let button = botonesAgregarAlCarrito[i];
+    button.addEventListener('click', agregarAlCarritoClicked);
+  }
 
-    //Agregamos funcionalidad al botón comprar
-    document.getElementsByClassName('btn-pagar')[0].addEventListener('click',pagarClicked)
+  //Agregamos funcionalidad al botón comprar
+  document.getElementsByClassName('btn-pagar')[0].addEventListener('click', pagarClicked);
 }
-//Eliminamos todos los elementos del carrito y lo ocultamos
-function pagarClicked(){
-  Swal.fire({
-    icon: 'success',
-    title: 'Su compra se realizo con exito',
-    text: 'Gracias por su compra!',
+
+// Utilizar la función ready como una promesa
+function initialize() {
+  return new Promise((resolve, reject) => {
+    document.addEventListener('DOMContentLoaded', () => {
+      resolve();
+    });
   });
-    //Elimino todos los elmentos del carrito
-    let carritoItems = document.getElementsByClassName('carrito-items')[0];
-    while (carritoItems.hasChildNodes()){
-        carritoItems.removeChild(carritoItems.firstChild)
-    }
-    actualizarTotalCarrito();
-    ocultarCarrito();
 }
+
+// Llamar a initialize y ejecutar la función ready
+initialize().then(ready);
+
+//Eliminamos todos los elementos del carrito y lo ocultamos
+function pagarClicked() {
+  return new Promise((resolve, reject) => {
+    Swal.fire({
+      icon: 'success',
+      title: 'Su compra se realizo con exito',
+      text: 'Gracias por su compra!',
+    }).then(() => {
+      // Elimino todos los elementos del carrito
+      let carritoItems = document.getElementsByClassName('carrito-items')[0];
+      while (carritoItems.hasChildNodes()) {
+        carritoItems.removeChild(carritoItems.firstChild);
+      }
+      actualizarTotalCarrito();
+      ocultarCarrito();
+
+      resolve();
+    });
+  });
+}
+
 //Funciòn que controla el boton clickeado de agregar al carrito
 function agregarAlCarritoClicked(event){
     let button = event.target;
